@@ -1,0 +1,9 @@
+__pycache__/
+*/__pycache__/
+*.pyc
+output/*.mp3
+output/temp/
+.env
+check_format.py
+test_fix.py
+.workbuddy/

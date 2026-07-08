@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: german-listening-generator
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m backend.main
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      # 如果有 LLM API Key，在这里配置：
+      # - key: LLM_API_KEY
+      #   value: sk-your-key
+      # - key: LLM_BASE_URL
+      #   value: https://api.deepseek.com/v1
+      # - key: LLM_MODEL
+      #   value: deepseek-chat
+    plan: free

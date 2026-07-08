@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsches Hörverständnis Generator · 德语听力生成器</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- 海浪装饰 -->
+    <div class="ocean-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <div class="container">
+        <!-- 标题 -->
+        <header class="header">
+            <h1>🌊 Deutsches Hörverständnis</h1>
+            <p class="subtitle">德语听力生成器 · 海洋主题</p>
+        </header>
+
+        <!-- 表单 -->
+        <div class="form-card">
+            <div class="form-group">
+                <label class="form-label">身份</label>
+                <div class="toggle-group" id="identity-group">
+                    <button class="toggle-btn active" data-value="student">👨‍🎓 学生</button>
+                    <button class="toggle-btn" data-value="teacher">👩‍🏫 老师</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">难度等级</label>
+                <div class="pill-group" id="difficulty-group">
+                    <button class="pill-btn active" data-value="A1">A1</button>
+                    <button class="pill-btn" data-value="A2">A2</button>
+                    <button class="pill-btn" data-value="B1">B1</button>
+                    <button class="pill-btn" data-value="B2">B2</button>
+                    <button class="pill-btn" data-value="C1">C1</button>
+                    <button class="pill-btn" data-value="C2">C2</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">题型</label>
+                <div class="pill-group" id="qtype-group">
+                    <button class="pill-btn active" data-value="选择题">选择题</button>
+                    <button class="pill-btn" data-value="填空题">填空题</button>
+                    <button class="pill-btn" data-value="解答题">解答题</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">主题</label>
+                <div class="theme-input-group">
+                    <input type="text" id="theme-input" placeholder="例如: Begrüßung, Reisen, Umweltschutz..." list="theme-suggestions">
+                    <datalist id="theme-suggestions">
+                        <option value="Begrüßung">
+                        <option value="Einkaufen">
+                        <option value="Reisen">
+                        <option value="Umweltschutz">
+                        <option value="Arbeitswelt">
+                        <option value="Freizeit">
+                        <option value="Gesundheit">
+                        <option value="Technologie">
+                        <option value="Kultur">
+                        <option value="Bildung">
+                    </datalist>
+                    <button id="generate-btn" class="generate-btn">
+                        <span class="btn-text">生成听力练习</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 加载中 -->
+        <div class="loading-card" id="loading" style="display:none;">
+            <div class="spinner-container">
+                <div class="spinner"></div>
+            </div>
+            <p class="loading-text" id="loading-text">正在生成德语听力练习...</p>
+        </div>
+
+        <!-- 错误提示 -->
+        <div class="error-card" id="error-card" style="display:none;">
+            <p id="error-text"></p>
+        </div>
+
+        <!-- 结果区 -->
+        <div class="results" id="results" style="display:none;">
+            <!-- 标题和来源 -->
+            <div class="result-meta" id="result-meta"></div>
+
+            <!-- 音频播放器 -->
+            <div class="result-card audio-card" id="audio-card">
+                <div class="card-header">
+                    <h2 class="card-title">🎧 听力音频</h2>
+                </div>
+                <audio id="audio-player" controls class="audio-player"></audio>
+                <div class="voice-info" id="voice-info"></div>
+            </div>
+
+            <!-- 题目 -->
+            <div class="result-card">
+                <div class="card-header">
+                    <h2 class="card-title">📝 题目</h2>
+                    <button class="copy-btn" data-target="questions-content">
+                        <span class="copy-icon">📋</span>
+                        <span class="copy-label">复制</span>
+                    </button>
+                </div>
+                <div id="questions-content" class="content-area"></div>
+            </div>
+
+            <!-- 对答案按钮 (仅学生) -->
+            <div class="reveal-section" id="reveal-section" style="display:none;">
+                <button id="reveal-btn" class="reveal-btn">
+                    <span>🔓</span>
+                    <span>对答案</span>
+                </button>
+            </div>
+
+            <!-- 听力原文 -->
+            <div class="result-card hidden-card" id="transcript-card">
+                <div class="card-header">
+                    <h2 class="card-title">📖 听力原文</h2>
+                    <button class="copy-btn" data-target="transcript-content">
+                        <span class="copy-icon">📋</span>
+                        <span class="copy-label">复制</span>
+                    </button>
+                </div>
+                <div id="transcript-content" class="content-area transcript-area"></div>
+            </div>
+
+            <!-- 答案 -->
+            <div class="result-card hidden-card" id="answers-card">
+                <div class="card-header">
+                    <h2 class="card-title">✅ 答案</h2>
+                    <button class="copy-btn" data-target="answers-content">
+                        <span class="copy-icon">📋</span>
+                        <span class="copy-label">复制</span>
+                    </button>
+                </div>
+                <div id="answers-content" class="content-area"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
